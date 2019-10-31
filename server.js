@@ -71,7 +71,6 @@ io.on('connection', (socket) => {
                     if (!cachedMessages || typeof cachedMessages === 'undefined') {
                         memcached.set('chatMessages', messages.join(','), 3600, function(err) {});
                     } else {
-                        console.log(messages);
                         memcached.replace('chatMessages', messages.join(','), 3600, function(err){});
                     }
                     return io.emit('addMessage', { message: data.message, });     
